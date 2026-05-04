@@ -40,7 +40,7 @@ export default async function PrivacyPage({
           {t('section1Body')}
         </p>
         <ul className="flex flex-col gap-2 ps-5">
-          {([1, 2, 3, 4] as const).map((n) => (
+          {([1, 2, 3, 4, 5] as const).map((n) => (
             <li
               key={n}
               className="text-base leading-relaxed text-text-secondary"
@@ -61,6 +61,16 @@ export default async function PrivacyPage({
         <p className="text-base leading-relaxed text-text-secondary">
           {t('section3Body')}
         </p>
+        <ul className="flex flex-col gap-2 ps-5">
+          {([1, 2, 3, 4] as const).map((n) => (
+            <li
+              key={n}
+              className="text-base leading-relaxed text-text-secondary"
+            >
+              • {t.rich(`section3Bullet${n}`, { strong })}
+            </li>
+          ))}
+        </ul>
       </LegalSection>
 
       <LegalSection title={t('section4Title')}>
@@ -71,10 +81,26 @@ export default async function PrivacyPage({
 
       <LegalSection title={t('section5Title')}>
         <p className="text-base leading-relaxed text-text-secondary">
-          {t.rich('section5Body', {
+          {t('section5Body')}
+        </p>
+        <ul className="flex flex-col gap-2 ps-5">
+          {([1, 2, 3, 4, 5, 6] as const).map((n) => (
+            <li
+              key={n}
+              className="text-base leading-relaxed text-text-secondary"
+            >
+              • {t.rich(`section5Bullet${n}`, { strong })}
+            </li>
+          ))}
+        </ul>
+      </LegalSection>
+
+      <LegalSection title={t('section6Title')}>
+        <p className="text-base leading-relaxed text-text-secondary">
+          {t.rich('section6Body', {
             link: (chunks) => (
               <a
-                href="mailto:privacy@hesabaty.com"
+                href="mailto:abdukhaznety@gmail.com"
                 className="font-semibold text-accent hover:underline"
               >
                 {chunks}
