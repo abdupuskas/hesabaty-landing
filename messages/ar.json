@@ -1,9 +1,473 @@
 {
+  "app": {
+    "nav": {
+      "dashboard": "اللوحة",
+      "moneyIn": "الإيرادات",
+      "moneyOut": "المصروفات",
+      "transactions": "المعاملات",
+      "reports": "التقارير",
+      "ask": "اسأل",
+      "shopify": "Shopify",
+      "settings": "الإعدادات"
+    },
+    "topbar": {
+      "signedInAs": "تم تسجيل الدخول باسم",
+      "signOut": "تسجيل الخروج"
+    },
+    "smartBanner": {
+      "body": "حسباتي بزنس أفضل على iOS.",
+      "cta": "حمّل التطبيق",
+      "dismiss": "إخفاء"
+    },
+    "dashboard": {
+      "title": "اللوحة",
+      "subtitle": "ملخص أموالك في لمحة.",
+      "moneyIn": "الإيرادات",
+      "moneyOut": "المصروفات",
+      "profit": "صافي الربح",
+      "recent": "النشاط الأخير",
+      "recentEmpty": "لا توجد حركات في هذه الفترة بعد.",
+      "viewAll": "عرض الكل ←",
+      "chartTitle": "التدفق النقدي",
+      "unpaid": "غير محصّل",
+      "dueSoon": "مستحق قريبًا",
+      "aiInsight": {
+        "title": "تحليل ذكي",
+        "generated": "تم التوليد",
+        "empty": "سنعرض رؤية جديدة فور توفر بيانات كافية."
+      },
+      "shopifyCard": {
+        "title": "طلبات شوبيفاي",
+        "collected": "محصّلة"
+      },
+      "quickAdd": {
+        "revenue": "إضافة إيراد",
+        "expense": "إضافة مصروف"
+      },
+      "range": {
+        "thisMonth": "هذا الشهر",
+        "lastMonth": "الشهر الماضي",
+        "thisYear": "هذه السنة",
+        "allTime": "كل الأوقات"
+      },
+      "noBusiness": {
+        "title": "أكمل الإعداد من تطبيق الجوال",
+        "body": "أنشئ ملف نشاطك في تطبيق حسباتي بزنس على الجوال لتتمكن من استخدام لوحة الويب. ستظهر أرقامك هنا تلقائيًا.",
+        "cta": "متاح على iOS — قريبًا على أندرويد"
+      }
+    },
+    "login": {
+      "title": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول إلى حسابك في حسباتي بزنس."
+    },
+    "taxonomy": {
+      "save": "حفظ",
+      "cancel": "إلغاء",
+      "rename": "إعادة تسمية",
+      "delete": "حذف",
+      "default": "افتراضي",
+      "empty": "لا يوجد شيء هنا بعد. أضف أول إدخال بالأعلى.",
+      "deleteConfirm": "حذف هذا العنصر؟ سيُحذف فقط إذا لم تشر إليه معاملات.",
+      "errors": {
+        "nameRequired": "يرجى إدخال الاسم.",
+        "unauthorized": "انتهت صلاحية الجلسة. يرجى تسجيل الدخول مجددًا.",
+        "inUse": "لا يمكن الحذف — توجد معاملات تشير إليه. أعد إسنادها أولًا.",
+        "generic": "تعذّر الحفظ. حاول مرة أخرى."
+      }
+    },
+    "list": {
+      "search": "بحث",
+      "searchPlaceholder": "ابحث…",
+      "empty": "لا يوجد ما يُعرض هنا بعد.",
+      "addFirst": "أضف أول إدخال",
+      "previous": "السابق",
+      "next": "التالي",
+      "page": "صفحة {n}",
+      "filterAll": "الكل",
+      "filterPaid": "مدفوع",
+      "filterUnpaid": "غير مدفوع",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "deleteConfirm": "حذف هذا الإدخال؟ لا يمكن التراجع.",
+      "channel": "القناة",
+      "channelAll": "كل القنوات",
+      "shipping": "الشحن",
+      "shippingAll": "كل شركات الشحن",
+      "category": "التصنيف",
+      "categoryAll": "كل التصنيفات",
+      "byCategory": "حسب التصنيف",
+      "uncategorized": "بدون تصنيف",
+      "totalThisMonth": "إجمالي هذا الشهر"
+    },
+    "form": {
+      "amount": "المبلغ",
+      "amountPlaceholder": "0.00",
+      "date": "التاريخ",
+      "note": "ملاحظة",
+      "notePlaceholder": "ملاحظة اختيارية",
+      "save": "حفظ",
+      "saving": "جارٍ الحفظ…",
+      "cancel": "إلغاء",
+      "delete": "حذف",
+      "category": "التصنيف",
+      "categoryPlaceholder": "اختر تصنيفًا",
+      "channel": "القناة",
+      "channelPlaceholder": "اختر قناة",
+      "newCategory": "+ تصنيف جديد",
+      "newChannel": "+ قناة جديدة",
+      "categoryName": "اسم التصنيف",
+      "channelName": "اسم القناة",
+      "create": "إنشاء",
+      "paymentMethod": "طريقة الدفع",
+      "paymentMethodPlaceholder": "مثل: كاش، تحويل بنكي",
+      "status": "الحالة",
+      "statusPaid": "مدفوع",
+      "statusUnpaid": "غير مدفوع",
+      "errors": {
+        "amountRequired": "المبلغ مطلوب.",
+        "amountInvalid": "يجب أن يكون المبلغ رقمًا موجبًا.",
+        "generic": "تعذّر الحفظ. حاول مرة أخرى."
+      }
+    },
+    "moneyIn": {
+      "title": "الإيرادات",
+      "subtitle": "تتبّع كل عملية بيع ومصدر دخل.",
+      "add": "إضافة إيراد",
+      "newTitle": "إضافة إيراد",
+      "editTitle": "تعديل إيراد",
+      "fields": {
+        "itemName": "اسم المنتج أو البيع",
+        "itemNamePlaceholder": "مثل: تيشيرت أسود، طلب خاص",
+        "quantity": "الكمية",
+        "shippingProvider": "شركة الشحن",
+        "shippingPlaceholder": "مثل: بُسطة، أرامكس",
+        "collectedAt": "تاريخ التحصيل"
+      },
+      "empty": "لا توجد إيرادات مسجلة في هذه الفترة بعد.",
+      "addFirst": "سجّل أول عملية بيع"
+    },
+    "transactions": {
+      "title": "المعاملات",
+      "subtitle": "كل الإيرادات والمصروفات في مكان واحد.",
+      "empty": "لا يوجد شيء هنا بعد."
+    },
+    "categoryDetail": {
+      "subtitle": "كل المصروفات ضمن هذا التصنيف.",
+      "empty": "لا توجد مصروفات في هذا التصنيف بعد.",
+      "back": "رجوع إلى التقارير"
+    },
+    "channelDetail": {
+      "subtitle": "كل الإيرادات من هذه القناة.",
+      "empty": "لا توجد إيرادات من هذه القناة بعد.",
+      "back": "رجوع إلى التقارير"
+    },
+    "moneyOut": {
+      "title": "المصروفات",
+      "subtitle": "تتبّع كل تكلفة ومصروف.",
+      "add": "إضافة مصروف",
+      "newTitle": "إضافة مصروف",
+      "editTitle": "تعديل مصروف",
+      "fields": {
+        "name": "اسم المصروف",
+        "namePlaceholder": "مثل: إيجار أبريل، حملة إعلانية",
+        "vendor": "المورّد",
+        "vendorPlaceholder": "لمن دفعت",
+        "paidAt": "تاريخ الدفع",
+        "dueDate": "تاريخ الاستحقاق",
+        "isRecurring": "مصروف متكرر"
+      },
+      "empty": "لا توجد مصروفات مسجلة في هذه الفترة بعد.",
+      "addFirst": "سجّل أول مصروف"
+    },
+    "reports": {
+      "title": "التقارير",
+      "subtitle": "إجماليات الفترة، التوزيعات، والاتجاهات.",
+      "totalIn": "الإيرادات",
+      "totalOut": "التكاليف",
+      "profit": "الربح",
+      "vsPrevious": "مقارنة بالفترة السابقة",
+      "topChannels": "أكثر قنوات البيع",
+      "topCategories": "أكثر تصنيفات المصروفات",
+      "noData": "لا توجد بيانات لهذه الفترة بعد.",
+      "uncategorized": "بدون تصنيف",
+      "exportCsv": "تصدير CSV",
+      "exportPdf": "تصدير PDF",
+      "exportReport": "تصدير التقرير",
+      "pnl": "الأرباح والخسائر",
+      "profitMargin": "هامش الربح",
+      "vsLastMonth": "مقارنة بالشهر الماضي",
+      "smartInsight": "رؤية ذكية",
+      "shopifyInsights": "إحصاءات شوبيفاي",
+      "collectionRate": "نسبة التحصيل",
+      "revenueGap": "فجوة الإيراد",
+      "missingOrders": "طلبات مفقودة",
+      "missingUnits": "وحدات مفقودة",
+      "investigate": "تحقَّق",
+      "paidOrders": "الطلبات المدفوعة",
+      "orderVolume": "عدد الطلبات",
+      "totalOrdered": "إجمالي المطلوب",
+      "avgOrderValue": "متوسط قيمة الطلب"
+    },
+    "ask": {
+      "title": "اسأل",
+      "subtitle": "اسأل أي شيء عن حساباتك — الربح، المصروفات، أفضل القنوات، وما يحتاج تحسين.",
+      "placeholder": "اسأل عن أرقامك…",
+      "send": "إرسال",
+      "reset": "محادثة جديدة",
+      "remaining": "متبقي {n} اليوم",
+      "empty": {
+        "heading": "ماذا تريد أن تفهم؟",
+        "body": "يمكنني قراءة أرقامك الفعلية والرد عليك بالعربية أو الإنجليزية. جرّب أحد هذه الاقتراحات."
+      },
+      "suggestions": {
+        "profit": "ما هو ربحي هذا الشهر؟",
+        "topChannel": "أي قناة تربحني أكثر؟",
+        "unpaid": "أرني الطلبات غير المدفوعة",
+        "improve": "كيف أحسّن هامش الربح؟"
+      },
+      "errors": {
+        "network": "تعذّر الاتصال بالمساعد. تأكد من الإنترنت وحاول مجددًا.",
+        "generic": "حدث خطأ. حاول مرة أخرى."
+      }
+    },
+    "shopify": {
+      "title": "Shopify",
+      "subtitle": "اربط متجر Shopify لمزامنة الطلبات تلقائيًا.",
+      "connectForm": {
+        "title": "اربط متجر Shopify",
+        "subtitle": "ألصق رابط المتجر و Access Token من Admin API. حسباتي يقرأ الطلبات فقط.",
+        "storeLabel": "رابط المتجر",
+        "storePlaceholder": "your-store.myshopify.com",
+        "storeHint": "النطاق فقط — بدون https://",
+        "tokenLabel": "Access Token من Admin API",
+        "tokenHint": "يبدأ بـ shpat_ (لن نعرضه مجددًا)",
+        "submit": "اربط المتجر",
+        "connecting": "جارٍ الربط…",
+        "howTo": {
+          "summary": "كيف أحصل على Access Token؟",
+          "step1": "في لوحة Shopify Admin، اذهب إلى Settings ← Apps and sales channels ← Develop apps.",
+          "step2": "أنشئ تطبيقًا خاصًا باسم \"Hesabaty Business\".",
+          "step3": "في Configuration ← Admin API، فعّل صلاحية read_orders.",
+          "step4": "ثبّت التطبيق ثم انسخ Admin API access token هنا."
+        },
+        "errors": {
+          "unauthorized": "انتهت صلاحية الجلسة. سجّل الدخول مجددًا.",
+          "storeRequired": "أدخل رابط المتجر.",
+          "tokenRequired": "ألصق Access Token.",
+          "invalidToken": "هذا التوكن غير صالح. تحقق منه وحاول مجددًا.",
+          "storeUnreachable": "تعذّر الوصول للمتجر. تحقق من الرابط وحاول مجددًا.",
+          "generic": "تعذّر الربط. حاول لاحقًا."
+        }
+      },
+      "reconciliation": {
+        "title": "مطابقة طلبات Shopify",
+        "subtitle": "ضع علامة \"تم التحصيل\" عندما تستلم النقد من شركة الشحن. سيتم ملء المبلغ والتاريخ ومرجع الطلب تلقائيًا.",
+        "back": "رجوع إلى الربط",
+        "empty": "لا توجد طلبات مُزامَنة بعد.",
+        "markCollected": "تم التحصيل",
+        "cardTitle": "مطابقة الطلبات",
+        "cardBody": "طابق طلبات Shopify مع الإيرادات الفعلية"
+      },
+      "status": "الاتصال",
+      "connected": "متصل",
+      "store": "المتجر",
+      "lastSync": "آخر مزامنة",
+      "neverSynced": "لم تتم بعد",
+      "totalOrders": "الطلبات المُزامَنة",
+      "recentOrders": "الطلبات الأخيرة",
+      "noOrders": "لا توجد طلبات مُزامَنة بعد. جرّب المزامنة اليدوية بالأسفل.",
+      "syncNow": "زامِن الآن",
+      "syncSuccess": "تمت المزامنة.",
+      "syncFailed": "تعذّرت المزامنة. حاول لاحقًا.",
+      "disconnect": "قطع الاتصال",
+      "disconnectConfirm": "قطع اتصال Shopify؟ ستبقى الطلبات المُزامَنة. لن تتم مزامنة الطلبات الجديدة حتى تعيد الربط.",
+      "disconnectSuccess": "تم قطع اتصال Shopify.",
+      "disconnectFailed": "تعذّر قطع الاتصال. حاول مجددًا."
+    },
+    "settings": {
+      "title": "الإعدادات",
+      "subtitle": "إدارة حسابك وتفضيلاتك.",
+      "manage": "الإدارة",
+      "language": "اللغة",
+      "languageEn": "English",
+      "languageAr": "العربية",
+      "account": "الحساب",
+      "email": "البريد الإلكتروني",
+      "signOut": "تسجيل الخروج",
+      "business": {
+        "title": "النشاط التجاري",
+        "subtitle": "حدّث اسم نشاطك ومجاله.",
+        "name": "اسم النشاط",
+        "industry": "المجال",
+        "customIndustry": "ماذا تبيع؟",
+        "saved": "تم الحفظ.",
+        "back": "رجوع إلى الإعدادات"
+      },
+      "channels": {
+        "title": "قنوات البيع",
+        "subtitle": "أين تبيع. تظهر هذه عند إضافة إيراد.",
+        "hint": "أين تبيع",
+        "back": "رجوع إلى الإعدادات"
+      },
+      "categories": {
+        "title": "تصنيفات المصروفات",
+        "subtitle": "صنّف مصروفاتك. تظهر هذه عند إضافة مصروف.",
+        "hint": "صنّف مصروفاتك",
+        "back": "رجوع إلى الإعدادات"
+      },
+      "notifications": {
+        "title": "التنبيهات",
+        "subtitle": "تذكيرات بالبريد والإشعارات للطلبات غير المدفوعة والمصروفات المتكررة.",
+        "hint": "تذكيرات وتنبيهات",
+        "comingSoon": "تفضيلات التنبيهات قادمة قريبًا. حاليًا يتولى تطبيق الجوال إرسال جميع التذكيرات.",
+        "back": "رجوع إلى الإعدادات"
+      },
+      "password": {
+        "title": "تغيير كلمة المرور",
+        "subtitle": "8 أحرف على الأقل. اختر كلمة تعرفها أنت فقط.",
+        "newPassword": "كلمة المرور الجديدة",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "submit": "تحديث كلمة المرور",
+        "saving": "جارٍ التحديث…",
+        "success": "تم تحديث كلمة المرور.",
+        "errors": {
+          "weak": "يجب أن تكون كلمة المرور 8 أحرف على الأقل.",
+          "mismatch": "كلمتا المرور غير متطابقتين.",
+          "unauthorized": "انتهت صلاحية الجلسة. يرجى تسجيل الدخول مجددًا.",
+          "generic": "تعذّر تحديث كلمة المرور. حاول مجددًا."
+        }
+      },
+      "dangerZone": {
+        "title": "منطقة الخطر",
+        "body": "احذف حسابك وكل بياناتك نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+        "deleteCta": "حذف حسابي",
+        "confirmBody": "اكتب DELETE للتأكيد. سيُحذف حسابك ونشاطك وكل المعاملات نهائيًا.",
+        "confirmPlaceholder": "DELETE",
+        "confirmDelete": "حذف نهائي",
+        "cancel": "إلغاء"
+      }
+    }
+  },
+  "onboarding": {
+    "title": "أعدّ نشاطك التجاري",
+    "subtitle": "بعض التفاصيل السريعة لتعرف حسباتي ماذا تبيع وأين.",
+    "section": {
+      "business": "نشاطك",
+      "businessHint": "سنعرض هذا الاسم في لوحتك وتقاريرك.",
+      "industry": "ماذا تبيع؟",
+      "industryHint": "اختر الأقرب. يمكنك تعديله لاحقًا من الإعدادات.",
+      "channels": "أين تبيع؟",
+      "channelsHint": "اختياري. اختر القنوات التي تستخدمها — يمكنك إضافة المزيد لاحقًا."
+    },
+    "businessName": "اسم النشاط",
+    "businessNamePlaceholder": "مثال: بوتيك نور",
+    "customIndustryPlaceholder": "أخبرنا ماذا تبيع",
+    "submit": "متابعة إلى اللوحة",
+    "submitting": "جارٍ الإعداد…",
+    "industries": {
+      "fashion": "أزياء",
+      "beauty": "تجميل",
+      "food": "طعام ومشروبات",
+      "electronics": "إلكترونيات",
+      "home": "منزل",
+      "services": "خدمات",
+      "retail": "تجزئة",
+      "other": "أخرى"
+    },
+    "errors": {
+      "nameRequired": "يرجى إدخال اسم النشاط.",
+      "industryRequired": "يرجى اختيار المجال.",
+      "customIndustryRequired": "أخبرنا ماذا تبيع لنخصص لك التجربة.",
+      "unauthorized": "انتهت صلاحية الجلسة. يرجى تسجيل الدخول مجددًا.",
+      "generic": "تعذّر الحفظ. حاول مرة أخرى."
+    }
+  },
+  "auth": {
+    "common": {
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "name": "الاسم الكامل",
+      "or": "أو",
+      "continueWithGoogle": "المتابعة باستخدام Google",
+      "continueWithApple": "المتابعة باستخدام Apple",
+      "loading": "لحظة من فضلك…",
+      "genericError": "حدث خطأ. حاول مرة أخرى."
+    },
+    "login": {
+      "title": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول إلى حسابك في حسباتي بزنس.",
+      "emailPlaceholder": "you@example.com",
+      "submit": "تسجيل الدخول",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "haveInvitePrompt": "لديك كود دعوة؟",
+      "haveInviteCta": "أدخله هنا ←",
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة."
+    },
+    "invite": {
+      "title": "أدخل كود الدعوة",
+      "subtitle": "حسباتي بزنس متاح بدعوة فقط خلال الوصول المبكر.",
+      "codeLabel": "كود الدعوة",
+      "codePlaceholder": "ABC123",
+      "submit": "متابعة",
+      "haveAccountPrompt": "لديك حساب بالفعل؟",
+      "haveAccountCta": "تسجيل الدخول ←",
+      "errors": {
+        "invalid": "كود الدعوة غير صحيح.",
+        "alreadyUsed": "تم استخدام كود الدعوة هذا من قبل.",
+        "rateLimited": "محاولات كثيرة. حاول بعد ساعة.",
+        "generic": "تعذّر التحقق من الكود. حاول مرة أخرى."
+      }
+    },
+    "signup": {
+      "title": "إنشاء حسابك",
+      "subtitle": "أهلاً بك في حسباتي بزنس.",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "٨ أحرف على الأقل",
+      "namePlaceholder": "مثل: نور أحمد",
+      "submit": "إنشاء الحساب",
+      "haveAccountPrompt": "لديك حساب بالفعل؟",
+      "haveAccountCta": "تسجيل الدخول ←",
+      "checkEmail": "افحص بريدك لتأكيد عنوانك وإكمال التسجيل.",
+      "errors": {
+        "emailExists": "يوجد حساب بهذا البريد بالفعل.",
+        "weakPassword": "يجب أن تكون كلمة المرور ٨ أحرف على الأقل.",
+        "noInvite": "أدخل كود الدعوة أولاً.",
+        "generic": "تعذّر إنشاء الحساب. حاول مرة أخرى."
+      }
+    },
+    "forgotPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "سنرسل لك رابطًا لإنشاء كلمة مرور جديدة.",
+      "emailPlaceholder": "you@example.com",
+      "submit": "أرسل رابط الاستعادة",
+      "sentTitle": "تفقّد بريدك",
+      "sentBody": "إذا كان هناك حساب بهذا البريد، ستجد رابط إعادة التعيين خلال لحظات.",
+      "back": "← العودة لتسجيل الدخول"
+    },
+    "resetPassword": {
+      "title": "أنشئ كلمة مرور جديدة",
+      "subtitle": "اختر كلمة مرور قوية لحسابك.",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "submit": "تحديث كلمة المرور",
+      "successTitle": "تم تحديث كلمة المرور",
+      "successBody": "يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة.",
+      "errors": {
+        "mismatch": "كلمتا المرور غير متطابقتين.",
+        "weak": "يجب أن تكون كلمة المرور ٨ أحرف على الأقل.",
+        "expired": "انتهت صلاحية رابط الاستعادة. اطلب رابطًا جديدًا.",
+        "generic": "تعذّر تحديث كلمة المرور. حاول مرة أخرى."
+      }
+    }
+  },
   "nav": {
     "features": "المزايا",
     "howItWorks": "كيف يعمل",
     "privacy": "الخصوصية",
-    "getApp": "حمّل التطبيق"
+    "getApp": "حمّل التطبيق",
+    "signIn": "تسجيل الدخول",
+    "openApp": "افتح التطبيق",
+    "getStarted": "ابدأ الآن"
   },
   "hero": {
     "badge": "مصمّم للشركات الصغيرة في مصر",

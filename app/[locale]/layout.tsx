@@ -4,6 +4,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { QueryProvider } from '@/components/providers/query-provider';
 import '../globals.css';
 
 const inter = Inter({
@@ -50,7 +51,9 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="bg-background text-text" suppressHydrationWarning>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

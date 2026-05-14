@@ -41,3 +41,57 @@ body {
   background: rgba(56, 189, 248, 0.3);
   color: #F1F5F9;
 }
+
+.prose-chat p { margin: 0; }
+.prose-chat p + p { margin-top: 0.5rem; }
+.prose-chat ul, .prose-chat ol {
+  margin: 0.5rem 0;
+  padding-inline-start: 1.25rem;
+}
+.prose-chat ul { list-style: disc; }
+.prose-chat ol { list-style: decimal; }
+.prose-chat li + li { margin-top: 0.125rem; }
+.prose-chat strong { color: var(--color-text); font-weight: 600; }
+.prose-chat em { color: var(--color-text-secondary); }
+.prose-chat code {
+  font-family: ui-monospace, monospace;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.05rem 0.3rem;
+  font-size: 0.85em;
+}
+.prose-chat pre {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+.prose-chat pre code { background: transparent; border: 0; padding: 0; }
+.prose-chat a { color: var(--color-accent); text-decoration: underline; }
+.prose-chat h1, .prose-chat h2, .prose-chat h3 {
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0.5rem 0 0.25rem;
+}
+.prose-chat h1 { font-size: 1.05rem; }
+.prose-chat h2 { font-size: 1rem; }
+.prose-chat h3 { font-size: 0.95rem; }
+.prose-chat table {
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+  font-size: 0.85em;
+}
+.prose-chat th, .prose-chat td {
+  border: 1px solid var(--color-border);
+  padding: 0.25rem 0.5rem;
+}
+.prose-chat th { background: var(--color-card); font-weight: 600; }
+.prose-chat blockquote {
+  border-inline-start: 2px solid var(--color-border);
+  padding-inline-start: 0.75rem;
+  color: var(--color-text-secondary);
+  margin: 0.5rem 0;
+}

@@ -1,9 +1,473 @@
 {
+  "app": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "moneyIn": "Money in",
+      "moneyOut": "Money out",
+      "transactions": "Transactions",
+      "reports": "Reports",
+      "ask": "Ask",
+      "shopify": "Shopify",
+      "settings": "Settings"
+    },
+    "topbar": {
+      "signedInAs": "Signed in as",
+      "signOut": "Sign out"
+    },
+    "smartBanner": {
+      "body": "Hesabaty Business is best on iOS.",
+      "cta": "Get the app",
+      "dismiss": "Dismiss"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Your money at a glance.",
+      "moneyIn": "Money in",
+      "moneyOut": "Money out",
+      "profit": "Profit",
+      "recent": "Recent activity",
+      "recentEmpty": "No transactions yet for this period.",
+      "viewAll": "View all →",
+      "chartTitle": "Cash flow",
+      "unpaid": "Unpaid",
+      "dueSoon": "Due soon",
+      "aiInsight": {
+        "title": "AI Insight",
+        "generated": "Generated",
+        "empty": "We'll surface a fresh insight as your numbers grow."
+      },
+      "shopifyCard": {
+        "title": "Shopify orders",
+        "collected": "collected"
+      },
+      "quickAdd": {
+        "revenue": "Add revenue",
+        "expense": "Add expense"
+      },
+      "range": {
+        "thisMonth": "This month",
+        "lastMonth": "Last month",
+        "thisYear": "This year",
+        "allTime": "All time"
+      },
+      "noBusiness": {
+        "title": "Finish setup on the mobile app",
+        "body": "Create your business profile in the Hesabaty Business mobile app to unlock the dashboard. Your numbers will sync here automatically.",
+        "cta": "Available for iOS — Android coming soon"
+      }
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your Hesabaty Business account."
+    },
+    "taxonomy": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "rename": "Rename",
+      "delete": "Delete",
+      "default": "Default",
+      "empty": "Nothing here yet. Add your first one above.",
+      "deleteConfirm": "Delete this item? It will only delete if no transactions reference it.",
+      "errors": {
+        "nameRequired": "Please enter a name.",
+        "unauthorized": "Your session expired. Sign in again.",
+        "inUse": "Can't delete — transactions still reference this. Reassign them first.",
+        "generic": "Couldn't save. Try again."
+      }
+    },
+    "list": {
+      "search": "Search",
+      "searchPlaceholder": "Search…",
+      "empty": "Nothing to show yet.",
+      "addFirst": "Add your first entry",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {n}",
+      "filterAll": "All",
+      "filterPaid": "Paid",
+      "filterUnpaid": "Unpaid",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this entry? This can't be undone.",
+      "channel": "Channel",
+      "channelAll": "All channels",
+      "shipping": "Shipping",
+      "shippingAll": "All providers",
+      "category": "Category",
+      "categoryAll": "All categories",
+      "byCategory": "By category",
+      "uncategorized": "Uncategorized",
+      "totalThisMonth": "Total this month"
+    },
+    "form": {
+      "amount": "Amount",
+      "amountPlaceholder": "0.00",
+      "date": "Date",
+      "note": "Note",
+      "notePlaceholder": "Optional note",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "category": "Category",
+      "categoryPlaceholder": "Select a category",
+      "channel": "Channel",
+      "channelPlaceholder": "Select a channel",
+      "newCategory": "+ New category",
+      "newChannel": "+ New channel",
+      "categoryName": "Category name",
+      "channelName": "Channel name",
+      "create": "Create",
+      "paymentMethod": "Payment method",
+      "paymentMethodPlaceholder": "e.g. Cash, Bank transfer",
+      "status": "Status",
+      "statusPaid": "Paid",
+      "statusUnpaid": "Unpaid",
+      "errors": {
+        "amountRequired": "Amount is required.",
+        "amountInvalid": "Amount must be a positive number.",
+        "generic": "Couldn't save. Try again."
+      }
+    },
+    "moneyIn": {
+      "title": "Money in",
+      "subtitle": "Track every sale and revenue source.",
+      "add": "Add revenue",
+      "newTitle": "Add revenue",
+      "editTitle": "Edit revenue",
+      "fields": {
+        "itemName": "Item or sale name",
+        "itemNamePlaceholder": "e.g. Black tee, custom order",
+        "quantity": "Quantity",
+        "shippingProvider": "Shipping provider",
+        "shippingPlaceholder": "e.g. Bosta, Aramex",
+        "collectedAt": "Collected on"
+      },
+      "empty": "No revenue logged yet for this period.",
+      "addFirst": "Log your first sale"
+    },
+    "transactions": {
+      "title": "Transactions",
+      "subtitle": "Every revenue and expense in one place.",
+      "empty": "Nothing here yet."
+    },
+    "categoryDetail": {
+      "subtitle": "All expenses in this category.",
+      "empty": "No expenses in this category yet.",
+      "back": "Back to reports"
+    },
+    "channelDetail": {
+      "subtitle": "All revenue from this channel.",
+      "empty": "No revenue from this channel yet.",
+      "back": "Back to reports"
+    },
+    "moneyOut": {
+      "title": "Money out",
+      "subtitle": "Track every cost and expense.",
+      "add": "Add expense",
+      "newTitle": "Add expense",
+      "editTitle": "Edit expense",
+      "fields": {
+        "name": "Expense name",
+        "namePlaceholder": "e.g. April rent, ad spend",
+        "vendor": "Vendor",
+        "vendorPlaceholder": "Who you paid",
+        "paidAt": "Paid on",
+        "dueDate": "Due date",
+        "isRecurring": "Recurring expense"
+      },
+      "empty": "No expenses logged yet for this period.",
+      "addFirst": "Log your first expense"
+    },
+    "reports": {
+      "title": "Reports",
+      "subtitle": "Period totals, breakdowns, and trends.",
+      "totalIn": "Revenue",
+      "totalOut": "Costs",
+      "profit": "Profit",
+      "vsPrevious": "vs previous period",
+      "topChannels": "Top revenue channels",
+      "topCategories": "Top expense categories",
+      "noData": "No data for this period yet.",
+      "uncategorized": "Uncategorized",
+      "exportCsv": "Export CSV",
+      "exportPdf": "Export PDF",
+      "exportReport": "Export report",
+      "pnl": "Profit & loss",
+      "profitMargin": "Profit margin",
+      "vsLastMonth": "Vs last month",
+      "smartInsight": "Smart insight",
+      "shopifyInsights": "Shopify insights",
+      "collectionRate": "Collection rate",
+      "revenueGap": "Revenue gap",
+      "missingOrders": "missing orders",
+      "missingUnits": "missing units",
+      "investigate": "Investigate",
+      "paidOrders": "Paid orders",
+      "orderVolume": "Order volume",
+      "totalOrdered": "Total ordered",
+      "avgOrderValue": "Avg. order value"
+    },
+    "ask": {
+      "title": "Ask",
+      "subtitle": "Ask anything about your books — profit, expenses, top channels, what to fix.",
+      "placeholder": "Ask about your numbers…",
+      "send": "Send",
+      "reset": "New chat",
+      "remaining": "{n} left today",
+      "empty": {
+        "heading": "What can I help you understand?",
+        "body": "I can read your real numbers and answer in plain Arabic or English. Try one of these to start."
+      },
+      "suggestions": {
+        "profit": "What's my profit this month?",
+        "topChannel": "Which channel makes me the most money?",
+        "unpaid": "Show me unpaid orders",
+        "improve": "How can I improve my margins?"
+      },
+      "errors": {
+        "network": "Couldn't reach the assistant. Check your connection and try again.",
+        "generic": "Something went wrong. Try again."
+      }
+    },
+    "shopify": {
+      "title": "Shopify",
+      "subtitle": "Connect your Shopify store to sync orders automatically.",
+      "connectForm": {
+        "title": "Connect your Shopify store",
+        "subtitle": "Paste your store URL and a private admin access token. Hesabaty only reads orders.",
+        "storeLabel": "Store URL",
+        "storePlaceholder": "your-store.myshopify.com",
+        "storeHint": "Just the domain — no https://",
+        "tokenLabel": "Admin API access token",
+        "tokenHint": "Starts with shpat_ (we never display this back to you)",
+        "submit": "Connect store",
+        "connecting": "Connecting…",
+        "howTo": {
+          "summary": "How do I get an access token?",
+          "step1": "In Shopify Admin, go to Settings → Apps and sales channels → Develop apps.",
+          "step2": "Create a private app called \"Hesabaty Business\".",
+          "step3": "Under Configuration → Admin API, grant the \"read_orders\" scope.",
+          "step4": "Install the app, then copy the Admin API access token here."
+        },
+        "errors": {
+          "unauthorized": "Your session expired. Sign in again.",
+          "storeRequired": "Please enter your store URL.",
+          "tokenRequired": "Please paste your access token.",
+          "invalidToken": "That token didn't work. Check it and try again.",
+          "storeUnreachable": "Couldn't reach that store. Check the URL and try again.",
+          "generic": "Couldn't connect. Try again in a moment."
+        }
+      },
+      "reconciliation": {
+        "title": "Reconcile Shopify orders",
+        "subtitle": "Mark orders as collected when the shipping company hands you the cash. The amount, date, and order ref pre-fill the revenue form.",
+        "back": "Back to integration",
+        "empty": "No orders synced yet.",
+        "markCollected": "Mark collected",
+        "cardTitle": "Reconcile orders",
+        "cardBody": "Match Shopify orders to actual cash collected"
+      },
+      "status": "Connection",
+      "connected": "Connected",
+      "store": "Store",
+      "lastSync": "Last sync",
+      "neverSynced": "Never",
+      "totalOrders": "Synced orders",
+      "recentOrders": "Recent orders",
+      "noOrders": "No orders synced yet. Try a manual sync below.",
+      "syncNow": "Sync now",
+      "syncSuccess": "Orders synced.",
+      "syncFailed": "Couldn't sync. Try again in a moment.",
+      "disconnect": "Disconnect",
+      "disconnectConfirm": "Disconnect Shopify? Existing synced orders will stay. New orders won't sync until you reconnect.",
+      "disconnectSuccess": "Shopify disconnected.",
+      "disconnectFailed": "Couldn't disconnect. Try again."
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage your account and preferences.",
+      "manage": "Manage",
+      "language": "Language",
+      "languageEn": "English",
+      "languageAr": "العربية",
+      "account": "Account",
+      "email": "Email",
+      "signOut": "Sign out",
+      "business": {
+        "title": "Business",
+        "subtitle": "Update your business name and industry.",
+        "name": "Business name",
+        "industry": "Industry",
+        "customIndustry": "What do you sell?",
+        "saved": "Saved.",
+        "back": "Back to settings"
+      },
+      "channels": {
+        "title": "Sales channels",
+        "subtitle": "Where you sell. These show up when adding revenue.",
+        "hint": "Where you sell",
+        "back": "Back to settings"
+      },
+      "categories": {
+        "title": "Expense categories",
+        "subtitle": "Group your expenses. These show up when adding an expense.",
+        "hint": "Group your expenses",
+        "back": "Back to settings"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Email and push reminders for unpaid orders and recurring expenses.",
+        "hint": "Reminders and alerts",
+        "comingSoon": "Notification preferences are rolling out next. For now, the mobile app handles all reminders.",
+        "back": "Back to settings"
+      },
+      "password": {
+        "title": "Change password",
+        "subtitle": "At least 8 characters. Use something only you would know.",
+        "newPassword": "New password",
+        "confirmPassword": "Confirm password",
+        "submit": "Update password",
+        "saving": "Updating…",
+        "success": "Password updated.",
+        "errors": {
+          "weak": "Password must be at least 8 characters.",
+          "mismatch": "Passwords don't match.",
+          "unauthorized": "Your session expired. Sign in again.",
+          "generic": "Couldn't update your password. Try again."
+        }
+      },
+      "dangerZone": {
+        "title": "Danger zone",
+        "body": "Permanently delete your account and every byte of data we hold about you. This cannot be undone.",
+        "deleteCta": "Delete my account",
+        "confirmBody": "Type DELETE to confirm. Your account, business, and all transactions will be permanently removed.",
+        "confirmPlaceholder": "DELETE",
+        "confirmDelete": "Permanently delete",
+        "cancel": "Cancel"
+      }
+    }
+  },
+  "onboarding": {
+    "title": "Set up your business",
+    "subtitle": "A few quick details so Hesabaty knows what you sell and where.",
+    "section": {
+      "business": "Your business",
+      "businessHint": "We'll show this name across your dashboard and reports.",
+      "industry": "What do you sell?",
+      "industryHint": "Pick the closest match. You can refine this later in settings.",
+      "channels": "Where do you sell?",
+      "channelsHint": "Optional. Pick the channels you use — you can always add more later."
+    },
+    "businessName": "Business name",
+    "businessNamePlaceholder": "e.g. Nour's Boutique",
+    "customIndustryPlaceholder": "Tell us what you sell",
+    "submit": "Continue to dashboard",
+    "submitting": "Setting up…",
+    "industries": {
+      "fashion": "Fashion",
+      "beauty": "Beauty",
+      "food": "Food & drink",
+      "electronics": "Electronics",
+      "home": "Home",
+      "services": "Services",
+      "retail": "Retail",
+      "other": "Other"
+    },
+    "errors": {
+      "nameRequired": "Please enter a business name.",
+      "industryRequired": "Please pick an industry.",
+      "customIndustryRequired": "Tell us what you sell so we can tailor things.",
+      "unauthorized": "Your session expired. Sign in again.",
+      "generic": "Couldn't save. Try again."
+    }
+  },
+  "auth": {
+    "common": {
+      "email": "Email",
+      "password": "Password",
+      "name": "Full name",
+      "or": "or",
+      "continueWithGoogle": "Continue with Google",
+      "continueWithApple": "Continue with Apple",
+      "loading": "Just a moment…",
+      "genericError": "Something went wrong. Please try again."
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your Hesabaty Business account.",
+      "emailPlaceholder": "you@example.com",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot password?",
+      "haveInvitePrompt": "Have an invite code?",
+      "haveInviteCta": "Enter it here →",
+      "invalidCredentials": "Email or password is incorrect."
+    },
+    "invite": {
+      "title": "Enter your invite code",
+      "subtitle": "Hesabaty Business is invite-only during early access.",
+      "codeLabel": "Invite code",
+      "codePlaceholder": "ABC123",
+      "submit": "Continue",
+      "haveAccountPrompt": "Already have an account?",
+      "haveAccountCta": "Sign in →",
+      "errors": {
+        "invalid": "That invite code isn't valid.",
+        "alreadyUsed": "This invite code has already been used.",
+        "rateLimited": "Too many attempts. Try again in an hour.",
+        "generic": "Couldn't validate that code. Try again."
+      }
+    },
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "Welcome to Hesabaty Business.",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "At least 8 characters",
+      "namePlaceholder": "e.g. Nour Ahmed",
+      "submit": "Create account",
+      "haveAccountPrompt": "Already have an account?",
+      "haveAccountCta": "Sign in →",
+      "checkEmail": "Check your inbox to confirm your email and finish signing up.",
+      "errors": {
+        "emailExists": "An account with this email already exists.",
+        "weakPassword": "Password must be at least 8 characters.",
+        "noInvite": "Please enter your invite code first.",
+        "generic": "Couldn't create your account. Try again."
+      }
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "We'll email you a link to set a new password.",
+      "emailPlaceholder": "you@example.com",
+      "submit": "Send reset link",
+      "sentTitle": "Check your inbox",
+      "sentBody": "If an account exists for that email, you'll receive a reset link in a moment.",
+      "back": "← Back to sign in"
+    },
+    "resetPassword": {
+      "title": "Set a new password",
+      "subtitle": "Choose a strong password for your account.",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "submit": "Update password",
+      "successTitle": "Password updated",
+      "successBody": "You can now sign in with your new password.",
+      "errors": {
+        "mismatch": "Passwords don't match.",
+        "weak": "Password must be at least 8 characters.",
+        "expired": "This reset link has expired. Request a new one.",
+        "generic": "Couldn't update your password. Try again."
+      }
+    }
+  },
   "nav": {
     "features": "Features",
     "howItWorks": "How it works",
     "privacy": "Privacy",
-    "getApp": "Get the App"
+    "getApp": "Get the App",
+    "signIn": "Sign in",
+    "openApp": "Open app",
+    "getStarted": "Get started"
   },
   "hero": {
     "badge": "Built for Egyptian SMEs",

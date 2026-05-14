@@ -36,12 +36,18 @@ export function Nav() {
 
         <div className="flex items-center gap-3">
           <LocaleSwitcher />
-          <button
-            type="button"
+          <Link
+            href="/login"
+            className="hidden sm:inline-flex items-center rounded-[10px] border border-border bg-card px-4 py-2.5 text-sm font-semibold text-text hover:border-text-muted transition-colors"
+          >
+            {t('signIn')}
+          </Link>
+          <Link
+            href="/invite"
             className="cursor-pointer rounded-[10px] bg-accent px-5 py-2.5 text-sm font-semibold text-background hover:bg-accent/90 transition-colors"
           >
-            {t('getApp')}
-          </button>
+            {t('getStarted')}
+          </Link>
         </div>
       </div>
     </header>
