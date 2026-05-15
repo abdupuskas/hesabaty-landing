@@ -1,7 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import { createClient } from '@/lib/supabase/server';
+import { headers } from 'next/headers';
 import { getCurrentBusiness } from '@/lib/business';
 import { routing } from '@/i18n/routing';
 
@@ -15,43 +14,46 @@ function pickLocale(formData: FormData): Locale {
 }
 
 export type ConnectResult =
-  | { ok: true; storeName: string }
+  | { ok: true; authUrl: string }
   | { ok: false; error: string };
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+
+function normalizeShop(input: string): string | null {
+  const cleaned = input.trim().toLowerCase()
+    .replace(/^https?:\/\//, '')
+    .replace(/\/+$/, '');
+  if (!cleaned) return null;
+  if (cleaned.includes('.') && !cleaned.endsWith('.myshopify.com')) return null;
+  return cleaned.endsWith('.myshopify.com') ? cleaned : `${cleaned}.myshopify.com`;
+}
+
+async function getRequestOrigin(): Promise<string> {
+  const h = await headers();
+  const proto = h.get('x-forwarded-proto') ?? 'https';
+  const host = h.get('x-forwarded-host') ?? h.get('host');
+  return `${proto}://${host}`;
+}
 
 export async function connectShopifyAction(formData: FormData): Promise<ConnectResult> {
   const locale = pickLocale(formData);
   const business = await getCurrentBusiness();
   if (!business) return { ok: false, error: 'unauthorized' };
 
-  const storeUrl = String(formData.get('store_url') ?? '').trim();
-  const accessToken = String(formData.get('access_token') ?? '').trim();
+  const storeInput = String(formData.get('store_url') ?? '').trim();
+  if (!storeInput) return { ok: false, error: 'storeRequired' };
 
-  if (!storeUrl) return { ok: false, error: 'storeRequired' };
-  if (!accessToken) return { ok: false, error: 'tokenRequired' };
+  const shop = normalizeShop(storeInput);
+  if (!shop) return { ok: false, error: 'invalidDomain' };
 
-  const supabase = await createClient();
-  const { data, error } = await supabase.functions.invoke('shopify-connect', {
-    body: { store_url: storeUrl, access_token: accessToken },
-  });
+  const origin = await getRequestOrigin();
+  const returnTo = `${origin}/${locale}/app/integrations/shopify`;
 
-  if (error) {
-    const msg =
-      (error as { context?: { error?: string }; message?: string }).context?.error ??
-      (error as { message?: string }).message ??
-      '';
-    if (/invalid access token/i.test(msg)) return { ok: false, error: 'invalidToken' };
-    if (/HTTP 4\d\d/.test(msg) || /could not connect/i.test(msg)) {
-      return { ok: false, error: 'storeUnreachable' };
-    }
-    return { ok: false, error: 'generic' };
-  }
+  const authUrl =
+    `${SUPABASE_URL}/functions/v1/shopify-auth` +
+    `?shop=${encodeURIComponent(shop)}` +
+    `&user_id=${encodeURIComponent(business.user_id)}` +
+    `&return_to=${encodeURIComponent(returnTo)}`;
 
-  const result = data as
-    | { success?: boolean; store_name?: string; error?: string }
-    | null;
-  if (!result?.success) return { ok: false, error: 'generic' };
-
-  revalidatePath(`/${locale}/app/integrations/shopify`);
-  revalidatePath(`/${locale}/app`);
-  return { ok: true, storeName: result.store_name ?? '' };
+  return { ok: true, authUrl };
 }

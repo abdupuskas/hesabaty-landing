@@ -2,14 +2,19 @@
 
 import { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/navigation';
 import { Plug } from 'lucide-react';
 import { connectShopifyAction } from '@/lib/shopify/connect-action';
 
+type ErrorKey =
+  | 'unauthorized'
+  | 'storeRequired'
+  | 'invalidDomain'
+  | 'storeUnreachable'
+  | 'generic';
+
 export function ShopifyConnectForm({ locale }: { locale: string }) {
   const t = useTranslations('app.shopify.connectForm');
-  const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ErrorKey | null>(null);
   const [pending, startTransition] = useTransition();
 
   const onSubmit = (formData: FormData) => {
@@ -18,10 +23,12 @@ export function ShopifyConnectForm({ locale }: { locale: string }) {
     startTransition(async () => {
       const res = await connectShopifyAction(formData);
       if (!res.ok) {
-        setError(res.error);
+        setError(res.error as ErrorKey);
         return;
       }
-      router.refresh();
+      // Hand off to Shopify OAuth. The shopify-callback edge function will
+      // redirect the browser back here with ?status=success|error.
+      window.location.href = res.authUrl;
     });
   };
 
@@ -48,19 +55,9 @@ export function ShopifyConnectForm({ locale }: { locale: string }) {
             className={inputClass}
           />
         </Field>
-        <Field label={t('tokenLabel')} hint={t('tokenHint')}>
-          <input
-            type="password"
-            name="access_token"
-            required
-            autoComplete="off"
-            placeholder="shpat_…"
-            className={inputClass}
-          />
-        </Field>
         {error ? (
           <p className="text-sm text-danger" role="alert">
-            {t(`errors.${error}` as 'errors.unauthorized' | 'errors.storeRequired' | 'errors.tokenRequired' | 'errors.invalidToken' | 'errors.storeUnreachable' | 'errors.generic')}
+            {t(`errors.${error}`)}
           </p>
         ) : null}
         <button
@@ -71,16 +68,6 @@ export function ShopifyConnectForm({ locale }: { locale: string }) {
           {pending ? t('connecting') : t('submit')}
         </button>
       </form>
-
-      <details className="mt-6 text-xs text-text-secondary">
-        <summary className="cursor-pointer hover:text-text">{t('howTo.summary')}</summary>
-        <ol className="mt-3 list-decimal space-y-1.5 ps-5">
-          <li>{t('howTo.step1')}</li>
-          <li>{t('howTo.step2')}</li>
-          <li>{t('howTo.step3')}</li>
-          <li>{t('howTo.step4')}</li>
-        </ol>
-      </details>
     </div>
   );
 }

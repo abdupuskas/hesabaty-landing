@@ -23,7 +23,12 @@ export default async function ShopifyPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string; month?: string }>;
+  searchParams: Promise<{
+    page?: string;
+    month?: string;
+    status?: string;
+    error?: string;
+  }>;
 }) {
   const { locale } = await params;
   const sp = await searchParams;
@@ -31,6 +36,7 @@ export default async function ShopifyPage({
   const t = await getTranslations('app.shopify');
   const tList = await getTranslations('app.list');
   const tDash = await getTranslations('app.dashboard');
+  const tCb = await getTranslations('app.shopify.callback');
 
   const business = await getCurrentBusiness();
   if (!business) {
@@ -69,6 +75,17 @@ export default async function ShopifyPage({
           {isConnected ? <ShopifyActions locale={locale} /> : null}
         </div>
       </div>
+
+      {sp.status === 'success' ? (
+        <div className="mt-6 rounded-lg border border-success/40 bg-success/10 px-4 py-3 text-sm text-success">
+          {tCb('success')}
+        </div>
+      ) : null}
+      {sp.status === 'error' ? (
+        <div className="mt-6 rounded-lg border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-danger">
+          {sp.error ? sp.error : tCb('error')}
+        </div>
+      ) : null}
 
       {!isConnected ? (
         <div className="mt-8">

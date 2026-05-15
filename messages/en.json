@@ -235,29 +235,23 @@
       "subtitle": "Connect your Shopify store to sync orders automatically.",
       "connectForm": {
         "title": "Connect your Shopify store",
-        "subtitle": "Paste your store URL and a private admin access token. Hesabaty only reads orders.",
+        "subtitle": "Enter your store URL. We'll send you to Shopify to authorize Hesabaty — we only read orders.",
         "storeLabel": "Store URL",
         "storePlaceholder": "your-store.myshopify.com",
         "storeHint": "Just the domain — no https://",
-        "tokenLabel": "Admin API access token",
-        "tokenHint": "Starts with shpat_ (we never display this back to you)",
-        "submit": "Connect store",
-        "connecting": "Connecting…",
-        "howTo": {
-          "summary": "How do I get an access token?",
-          "step1": "In Shopify Admin, go to Settings → Apps and sales channels → Develop apps.",
-          "step2": "Create a private app called \"Hesabaty Business\".",
-          "step3": "Under Configuration → Admin API, grant the \"read_orders\" scope.",
-          "step4": "Install the app, then copy the Admin API access token here."
-        },
+        "submit": "Connect with Shopify",
+        "connecting": "Redirecting to Shopify…",
         "errors": {
           "unauthorized": "Your session expired. Sign in again.",
           "storeRequired": "Please enter your store URL.",
-          "tokenRequired": "Please paste your access token.",
-          "invalidToken": "That token didn't work. Check it and try again.",
+          "invalidDomain": "That doesn't look like a Shopify store. Use yourstore.myshopify.com.",
           "storeUnreachable": "Couldn't reach that store. Check the URL and try again.",
           "generic": "Couldn't connect. Try again in a moment."
         }
+      },
+      "callback": {
+        "success": "Shopify store connected. Your orders are syncing.",
+        "error": "Couldn't finish connecting your Shopify store. Try again."
       },
       "reconciliation": {
         "title": "Reconcile Shopify orders",

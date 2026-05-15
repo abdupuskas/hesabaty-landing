@@ -235,29 +235,23 @@
       "subtitle": "اربط متجر Shopify لمزامنة الطلبات تلقائيًا.",
       "connectForm": {
         "title": "اربط متجر Shopify",
-        "subtitle": "ألصق رابط المتجر و Access Token من Admin API. حسباتي يقرأ الطلبات فقط.",
+        "subtitle": "أدخل رابط المتجر، وسننقلك إلى Shopify لتفويض حسباتي. نحن نقرأ الطلبات فقط.",
         "storeLabel": "رابط المتجر",
         "storePlaceholder": "your-store.myshopify.com",
         "storeHint": "النطاق فقط — بدون https://",
-        "tokenLabel": "Access Token من Admin API",
-        "tokenHint": "يبدأ بـ shpat_ (لن نعرضه مجددًا)",
-        "submit": "اربط المتجر",
-        "connecting": "جارٍ الربط…",
-        "howTo": {
-          "summary": "كيف أحصل على Access Token؟",
-          "step1": "في لوحة Shopify Admin، اذهب إلى Settings ← Apps and sales channels ← Develop apps.",
-          "step2": "أنشئ تطبيقًا خاصًا باسم \"Hesabaty Business\".",
-          "step3": "في Configuration ← Admin API، فعّل صلاحية read_orders.",
-          "step4": "ثبّت التطبيق ثم انسخ Admin API access token هنا."
-        },
+        "submit": "اربط مع Shopify",
+        "connecting": "جارٍ التحويل إلى Shopify…",
         "errors": {
           "unauthorized": "انتهت صلاحية الجلسة. سجّل الدخول مجددًا.",
           "storeRequired": "أدخل رابط المتجر.",
-          "tokenRequired": "ألصق Access Token.",
-          "invalidToken": "هذا التوكن غير صالح. تحقق منه وحاول مجددًا.",
+          "invalidDomain": "هذا الرابط لا يبدو متجر Shopify. استخدم yourstore.myshopify.com.",
           "storeUnreachable": "تعذّر الوصول للمتجر. تحقق من الرابط وحاول مجددًا.",
           "generic": "تعذّر الربط. حاول لاحقًا."
         }
+      },
+      "callback": {
+        "success": "تم ربط متجر Shopify. جارٍ مزامنة طلباتك.",
+        "error": "تعذّر إكمال ربط متجر Shopify. حاول مجددًا."
       },
       "reconciliation": {
         "title": "مطابقة طلبات Shopify",
