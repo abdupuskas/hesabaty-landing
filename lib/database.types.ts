@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       ai_insights: {
@@ -54,37 +79,43 @@ export type Database = {
       }
       business_integrations: {
         Row: {
+          access_token: string | null
           business_id: string
           created_at: string
           id: string
           is_active: boolean
           last_synced_at: string | null
           provider: string
+          refresh_token: string | null
           store_url: string
           sync_start_date: string | null
-          vault_secret: string | null
+          token_expires_at: string | null
         }
         Insert: {
+          access_token?: string | null
           business_id: string
           created_at?: string
           id?: string
           is_active?: boolean
           last_synced_at?: string | null
           provider?: string
+          refresh_token?: string | null
           store_url: string
           sync_start_date?: string | null
-          vault_secret?: string | null
+          token_expires_at?: string | null
         }
         Update: {
+          access_token?: string | null
           business_id?: string
           created_at?: string
           id?: string
           is_active?: boolean
           last_synced_at?: string | null
           provider?: string
+          refresh_token?: string | null
           store_url?: string
           sync_start_date?: string | null
-          vault_secret?: string | null
+          token_expires_at?: string | null
         }
         Relationships: [
           {
@@ -190,6 +221,8 @@ export type Database = {
           paid_at: string | null
           payment_method: string | null
           recurrence: string | null
+          reminder_notification_id: string | null
+          reminder_offset_minutes: number | null
           vendor: string | null
         }
         Insert: {
@@ -205,6 +238,8 @@ export type Database = {
           paid_at?: string | null
           payment_method?: string | null
           recurrence?: string | null
+          reminder_notification_id?: string | null
+          reminder_offset_minutes?: number | null
           vendor?: string | null
         }
         Update: {
@@ -220,6 +255,8 @@ export type Database = {
           paid_at?: string | null
           payment_method?: string | null
           recurrence?: string | null
+          reminder_notification_id?: string | null
+          reminder_offset_minutes?: number | null
           vendor?: string | null
         }
         Relationships: [
@@ -270,11 +307,14 @@ export type Database = {
           channel_id: string | null
           collected_at: string | null
           created_at: string | null
+          expected_payment_date: string | null
           id: string
           item_name: string | null
           note: string | null
           payment_method: string | null
           quantity: number | null
+          reminder_notification_id: string | null
+          reminder_offset_minutes: number | null
           shipping_provider: string | null
           status: string
         }
@@ -284,11 +324,14 @@ export type Database = {
           channel_id?: string | null
           collected_at?: string | null
           created_at?: string | null
+          expected_payment_date?: string | null
           id?: string
           item_name?: string | null
           note?: string | null
           payment_method?: string | null
           quantity?: number | null
+          reminder_notification_id?: string | null
+          reminder_offset_minutes?: number | null
           shipping_provider?: string | null
           status?: string
         }
@@ -298,11 +341,14 @@ export type Database = {
           channel_id?: string | null
           collected_at?: string | null
           created_at?: string | null
+          expected_payment_date?: string | null
           id?: string
           item_name?: string | null
           note?: string | null
           payment_method?: string | null
           quantity?: number | null
+          reminder_notification_id?: string | null
+          reminder_offset_minutes?: number | null
           shipping_provider?: string | null
           status?: string
         }
@@ -358,6 +404,57 @@ export type Database = {
           },
         ]
       }
+      shopify_compliance_log: {
+        Row: {
+          id: string
+          payload: Json | null
+          received_at: string
+          shop_domain: string
+          topic: string
+        }
+        Insert: {
+          id?: string
+          payload?: Json | null
+          received_at?: string
+          shop_domain: string
+          topic: string
+        }
+        Update: {
+          id?: string
+          payload?: Json | null
+          received_at?: string
+          shop_domain?: string
+          topic?: string
+        }
+        Relationships: []
+      }
+      shopify_oauth_states: {
+        Row: {
+          created_at: string
+          id: string
+          return_to: string | null
+          shop: string
+          state: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          return_to?: string | null
+          shop: string
+          state: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          return_to?: string | null
+          shop?: string
+          state?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       shopify_orders: {
         Row: {
           business_id: string
@@ -369,7 +466,9 @@ export type Database = {
           line_items_summary: string | null
           order_created_at: string
           order_number: string | null
+          original_total_price: number | null
           shipping_provider: string | null
+          shopify_customer_id: string | null
           shopify_order_id: string
           subtotal_price: number | null
           synced_at: string
@@ -385,7 +484,9 @@ export type Database = {
           line_items_summary?: string | null
           order_created_at: string
           order_number?: string | null
+          original_total_price?: number | null
           shipping_provider?: string | null
+          shopify_customer_id?: string | null
           shopify_order_id: string
           subtotal_price?: number | null
           synced_at?: string
@@ -401,7 +502,9 @@ export type Database = {
           line_items_summary?: string | null
           order_created_at?: string
           order_number?: string | null
+          original_total_price?: number | null
           shipping_provider?: string | null
+          shopify_customer_id?: string | null
           shopify_order_id?: string
           subtotal_price?: number | null
           synced_at?: string
@@ -417,12 +520,47 @@ export type Database = {
           },
         ]
       }
+      shopify_pending_installs: {
+        Row: {
+          access_token: string
+          created_at: string
+          refresh_token: string
+          shop: string
+          token_expires_at: string
+          updated_at: string
+        }
+        Insert: {
+          access_token: string
+          created_at?: string
+          refresh_token: string
+          shop: string
+          token_expires_at: string
+          updated_at?: string
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          refresh_token?: string
+          shop?: string
+          token_expires_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      consume_sms_quota: {
+        Args: { p_month_limit: number; p_user_id: string }
+        Returns: {
+          allowed: boolean
+          month_count: number
+          reset_at: string
+        }[]
+      }
+      get_sms_month_count: { Args: { p_user_id: string }; Returns: number }
     }
     Enums: {
       [_ in never]: never
@@ -551,6 +689,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },

@@ -127,7 +127,8 @@
         "amountRequired": "Amount is required.",
         "amountInvalid": "Amount must be a positive number.",
         "generic": "Couldn't save. Try again."
-      }
+      },
+      "addNew": "Add new"
     },
     "moneyIn": {
       "title": "Money in",
@@ -341,6 +342,20 @@
         "confirmPlaceholder": "DELETE",
         "confirmDelete": "Permanently delete",
         "cancel": "Cancel"
+      },
+      "paymentMethods": {
+        "title": "Payment methods",
+        "subtitle": "How you collect money. These show up when adding revenue or an expense.",
+        "hint": "How money is collected",
+        "back": "Back to settings",
+        "placeholder": "e.g. Vodafone Cash"
+      },
+      "shippingProviders": {
+        "title": "Shipping providers",
+        "subtitle": "Couriers and shipping companies. These show up when adding revenue.",
+        "hint": "Couriers and shipping companies",
+        "back": "Back to settings",
+        "placeholder": "e.g. Mylerz"
       }
     }
   },
@@ -730,5 +745,29 @@
     "formMessage": "Message",
     "formMessagePlaceholder": "Tell us a bit about you and your business...",
     "formSubmit": "Send message"
+  },
+  "supportPage": {
+    "eyebrow": "Support",
+    "title": "How can we help?",
+    "intro": "We are a small team in Cairo. Most questions get a real answer within 24 hours, Sunday through Thursday.",
+    "contactCardTitle": "Talk to a human",
+    "contactCardBody": "Email support@hesabaty.com and we will reply within 24 hours.",
+    "contactCardButton": "Email support",
+    "contactEmail": "support@hesabaty.com",
+    "hoursLabel": "Response hours",
+    "hoursValue": "Sun–Thu, 9am–6pm Cairo time",
+    "faqTitle": "Frequently asked questions",
+    "faq1Question": "How do I get an invite code?",
+    "faq1Answer": "Hesabaty Business is currently invite-only as we onboard our first cohort of Egyptian merchants. Join the waitlist on our home page and we will send you a code as soon as a spot opens up.",
+    "faq2Question": "I can not sign in or I forgot my password. What now?",
+    "faq2Answer": "Use the Forgot password link on the sign-in screen to receive a reset email. If you still can not get in, email support@hesabaty.com from the address you signed up with and we will help you recover the account.",
+    "faq3Question": "How do I connect my Shopify store?",
+    "faq3Answer": "Open Settings, choose Integrations, then Shopify. Enter your shop URL (for example mystore.myshopify.com) and approve the permissions in the Shopify popup. Your orders will start syncing within a minute.",
+    "faq4Question": "How do I export my reports as PDF or CSV?",
+    "faq4Answer": "Open the Reports tab, pick the month you want, and use the Export CSV or Export PDF button at the bottom of the page. The file will download to your device.",
+    "faq5Question": "How do I add a new payment method or shipping company?",
+    "faq5Answer": "Open Settings, then Payment Methods or Shipping Providers. Type a name, pick an icon, and tap Add. It will then appear in the dropdown the next time you add revenue or an expense.",
+    "faq6Question": "How do I delete my account?",
+    "faq6Answer": "Open Settings, scroll to Danger Zone, and choose Delete Account. We will permanently remove your data within 30 days. You can also email support@hesabaty.com to request deletion and we will handle it for you."
   }
 }

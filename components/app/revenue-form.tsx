@@ -2,13 +2,18 @@
 
 import { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link, useRouter } from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import {
   createRevenueAction,
   updateRevenueAction,
   deleteRevenueAction,
 } from '@/lib/transactions/actions';
 import { Trash2, ChevronDown } from 'lucide-react';
+import { OptionSelect, type OptionItem } from '@/components/app/option-select';
+import {
+  createPaymentMethodAction,
+  createShippingProviderAction,
+} from '@/lib/payment-shipping/actions';
 
 type Channel = { id: string; name: string };
 
@@ -28,16 +33,19 @@ export type RevenueFormValues = {
 export function RevenueForm({
   locale,
   channels,
+  paymentMethods,
+  shippingProviders,
   initial,
 }: {
   locale: string;
   channels: Channel[];
+  paymentMethods: OptionItem[];
+  shippingProviders: OptionItem[];
   initial?: RevenueFormValues;
 }) {
   const t = useTranslations('app.form');
   const tIn = useTranslations('app.moneyIn.fields');
   const tList = useTranslations('app.list');
-  const router = useRouter();
   const isEdit = !!initial?.id;
 
   const [error, setError] = useState<string | null>(null);
@@ -142,21 +150,27 @@ export function RevenueForm({
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label={t('paymentMethod')}>
-          <input
-            type="text"
+          <OptionSelect
             name="payment_method"
+            options={paymentMethods}
             defaultValue={initial?.payment_method ?? ''}
             placeholder={t('paymentMethodPlaceholder')}
-            className={inputClass}
+            addLabel={t('addNew')}
+            newPlaceholder={t('paymentMethodPlaceholder')}
+            createAction={createPaymentMethodAction}
+            locale={locale}
           />
         </Field>
         <Field label={tIn('shippingProvider')}>
-          <input
-            type="text"
+          <OptionSelect
             name="shipping_provider"
+            options={shippingProviders}
             defaultValue={initial?.shipping_provider ?? ''}
             placeholder={tIn('shippingPlaceholder')}
-            className={inputClass}
+            addLabel={t('addNew')}
+            newPlaceholder={tIn('shippingPlaceholder')}
+            createAction={createShippingProviderAction}
+            locale={locale}
           />
         </Field>
       </div>

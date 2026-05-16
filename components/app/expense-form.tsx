@@ -9,6 +9,8 @@ import {
   deleteExpenseAction,
 } from '@/lib/transactions/actions';
 import { Trash2, ChevronDown } from 'lucide-react';
+import { OptionSelect, type OptionItem } from '@/components/app/option-select';
+import { createPaymentMethodAction } from '@/lib/payment-shipping/actions';
 
 type Category = { id: string; name: string; icon?: string | null };
 
@@ -28,10 +30,12 @@ export type ExpenseFormValues = {
 export function ExpenseForm({
   locale,
   categories,
+  paymentMethods,
   initial,
 }: {
   locale: string;
   categories: Category[];
+  paymentMethods: OptionItem[];
   initial?: ExpenseFormValues;
 }) {
   const t = useTranslations('app.form');
@@ -154,12 +158,15 @@ export function ExpenseForm({
       </div>
 
       <Field label={t('paymentMethod')}>
-        <input
-          type="text"
+        <OptionSelect
           name="payment_method"
+          options={paymentMethods}
           defaultValue={initial?.payment_method ?? ''}
           placeholder={t('paymentMethodPlaceholder')}
-          className={inputClass}
+          addLabel={t('addNew')}
+          newPlaceholder={t('paymentMethodPlaceholder')}
+          createAction={createPaymentMethodAction}
+          locale={locale}
         />
       </Field>
 

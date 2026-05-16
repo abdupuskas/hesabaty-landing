@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { notFound, redirect } from 'next/navigation';
 import { getCurrentBusiness } from '@/lib/business';
 import { getExpense, listExpenseCategories } from '@/lib/queries/transactions';
+import { listPaymentMethodOptions } from '@/lib/queries/payment-shipping';
 import { ExpenseForm } from '@/components/app/expense-form';
 
 export default async function EditExpensePage({
@@ -16,9 +17,10 @@ export default async function EditExpensePage({
   const business = await getCurrentBusiness();
   if (!business) redirect(`/${locale}/app`);
 
-  const [row, categories] = await Promise.all([
+  const [row, categories, paymentMethods] = await Promise.all([
     getExpense(business!.id, id),
     listExpenseCategories(business!.id),
+    listPaymentMethodOptions(business!.id),
   ]);
   if (!row) notFound();
 
@@ -29,6 +31,7 @@ export default async function EditExpensePage({
         <ExpenseForm
           locale={locale}
           categories={categories}
+          paymentMethods={paymentMethods}
           initial={{
             id: row.id,
             amount: row.amount,

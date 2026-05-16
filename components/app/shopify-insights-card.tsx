@@ -72,7 +72,7 @@ export function ShopifyInsightsCard({
             ≈ {collection.missingOrders} {missingOrdersLabel} · {collection.missingUnits} {missingUnitsLabel}
           </span>
           <Link
-            href="/app/shopify"
+            href="/app/shopify/reconciliation"
             className="inline-flex items-center gap-1 text-xs font-medium text-accent hover:text-accent/80"
           >
             {investigateLabel}

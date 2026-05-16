@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
 import { Download } from 'lucide-react';
+// Note: export buttons use plain <a>, not next-intl Link — they hit Route Handlers
+// with the locale already in the path, and next-intl Link would prefix it again.
 import { getCurrentBusiness } from '@/lib/business';
 import {
   getReportData,
@@ -204,20 +205,20 @@ export default async function ReportsPage({
       </div>
 
       <div className="mt-8 flex flex-col gap-2 sm:flex-row">
-        <Link
-          href={exportCsvHref as `/${string}`}
+        <a
+          href={exportCsvHref}
           className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-border bg-card px-4 py-3 text-sm font-medium text-text hover:border-text-muted transition-colors"
         >
           <Download size={14} strokeWidth={1.75} />
           {t('exportCsv')}
-        </Link>
-        <Link
-          href={exportPdfHref as `/${string}`}
+        </a>
+        <a
+          href={exportPdfHref}
           className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-accent px-4 py-3 text-sm font-medium text-background hover:bg-accent/90 transition-colors"
         >
           <Download size={14} strokeWidth={1.75} />
           {t('exportReport')}
-        </Link>
+        </a>
       </div>
     </div>
   );

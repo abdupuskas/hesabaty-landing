@@ -8,7 +8,7 @@ export function ShopifyCard({
   locale,
   title,
   collectedLabel,
-  href = '/app/shopify',
+  href = '/app/integrations/shopify',
 }: {
   totalOrdered: number;
   collectionRate: number | null;

@@ -1,6 +1,11 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 import type { ReportData } from '@/lib/queries/reports';
+import type {
+  ExportDetail,
+  ExportRevenueRow,
+  ExportExpenseRow,
+  ExportShopifyOrder,
+} from '@/lib/queries/export-detail';
 
 let fontRegistered = false;
 let arabicFontRegistered = false;
@@ -38,12 +43,14 @@ async function ensureFonts(useArabic: boolean) {
 const styles = StyleSheet.create({
   page: {
     padding: 36,
+    paddingBottom: 60,
     fontFamily: 'Roboto',
     fontSize: 10,
     color: '#0F1115',
   },
   pageRtl: {
     padding: 36,
+    paddingBottom: 60,
     fontFamily: 'Cairo',
     fontSize: 10,
     color: '#0F1115',
@@ -78,6 +85,17 @@ const styles = StyleSheet.create({
   },
   cell: { flex: 1 },
   cellRight: { flex: 1, textAlign: 'right' },
+  cellNarrow: { width: 60 },
+  cellNarrowRight: { width: 80, textAlign: 'right' },
+  miniRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 4,
+  },
+  miniLabel: { color: '#475569' },
+  miniValue: { fontWeight: 'bold' },
+  badgePos: { color: '#16a34a' },
+  badgeNeg: { color: '#dc2626' },
   footer: {
     position: 'absolute',
     bottom: 24,
@@ -98,6 +116,34 @@ export type PdfStrings = {
   profit: string;
   topChannels: string;
   topCategories: string;
+  momTitle: string;
+  momMetricRevenue: string;
+  momMetricExpenses: string;
+  momMetricProfit: string;
+  momCurrentHeader: string;
+  momPreviousHeader: string;
+  momChangeHeader: string;
+  unpaidTitle: string;
+  unpaidRevenueLabel: string;
+  unpaidExpensesLabel: string;
+  countWord: string;
+  revenueDetailTitle: string;
+  expenseDetailTitle: string;
+  dateHeader: string;
+  nameHeader: string;
+  counterpartyHeader: string;
+  paymentHeader: string;
+  statusHeader: string;
+  shopifyTitle: string;
+  collectionRateLabel: string;
+  revenueGapLabel: string;
+  orderVolumeLabel: string;
+  totalOrderedLabel: string;
+  avgOrderValueLabel: string;
+  refundedLabel: string;
+  shopifyOrdersTitle: string;
+  orderHeader: string;
+  customerHeader: string;
   uncategorized: string;
   noData: string;
   channelHeader: string;
@@ -106,15 +152,21 @@ export type PdfStrings = {
   shareHeader: string;
   countHeader: string;
   footer: string;
+  paid: string;
+  unpaid: string;
 };
+
+const MAX_DETAIL_ROWS = 25;
 
 export async function buildPdfDocument({
   data,
+  detail,
   locale,
   strings,
   format,
 }: {
   data: ReportData;
+  detail: ExportDetail;
   locale: 'en' | 'ar';
   strings: PdfStrings;
   format: (n: number) => string;
@@ -123,6 +175,24 @@ export async function buildPdfDocument({
   await ensureFonts(isRtl);
 
   const pageStyle = isRtl ? styles.pageRtl : styles.page;
+
+  const momRows = [
+    {
+      label: strings.momMetricRevenue,
+      current: data.totalIn,
+      previous: data.prevTotalIn,
+    },
+    {
+      label: strings.momMetricExpenses,
+      current: data.totalOut,
+      previous: data.prevTotalOut,
+    },
+    {
+      label: strings.momMetricProfit,
+      current: data.profit,
+      previous: data.prevProfit,
+    },
+  ];
 
   return (
     <Document>
@@ -147,6 +217,36 @@ export async function buildPdfDocument({
             <Text style={styles.kpiLabel}>{strings.profit}</Text>
             <Text style={[styles.kpiValue, { color: '#0284c7' }]}>{format(data.profit)}</Text>
           </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{strings.momTitle}</Text>
+          <View style={styles.tableHeader}>
+            <Text style={styles.cell}>{' '}</Text>
+            <Text style={styles.cellRight}>{strings.momCurrentHeader}</Text>
+            <Text style={styles.cellRight}>{strings.momPreviousHeader}</Text>
+            <Text style={styles.cellRight}>{strings.momChangeHeader}</Text>
+          </View>
+          {momRows.map((r) => {
+            const change = pctChange(r.current, r.previous);
+            const positive = change >= 0;
+            return (
+              <View key={r.label} style={styles.tableRow}>
+                <Text style={styles.cell}>{r.label}</Text>
+                <Text style={styles.cellRight}>{format(r.current)}</Text>
+                <Text style={styles.cellRight}>{format(r.previous)}</Text>
+                <Text
+                  style={[
+                    styles.cellRight,
+                    positive ? styles.badgePos : styles.badgeNeg,
+                  ]}
+                >
+                  {positive ? '+' : ''}
+                  {change.toFixed(0)}%
+                </Text>
+              </View>
+            );
+          })}
         </View>
 
         <View style={styles.section}>
@@ -179,12 +279,136 @@ export async function buildPdfDocument({
           />
         </View>
 
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{strings.unpaidTitle}</Text>
+          <View style={styles.miniRow}>
+            <Text style={styles.miniLabel}>
+              {strings.unpaidRevenueLabel} ({detail.unpaid.unpaidRevenueCount}{' '}
+              {strings.countWord})
+            </Text>
+            <Text style={styles.miniValue}>
+              {format(detail.unpaid.unpaidRevenueTotal)}
+            </Text>
+          </View>
+          <View style={styles.miniRow}>
+            <Text style={styles.miniLabel}>
+              {strings.unpaidExpensesLabel} ({detail.unpaid.unpaidExpensesCount}{' '}
+              {strings.countWord})
+            </Text>
+            <Text style={styles.miniValue}>
+              {format(detail.unpaid.unpaidExpensesTotal)}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.section} break>
+          <Text style={styles.sectionTitle}>{strings.revenueDetailTitle}</Text>
+          <RevenueDetail
+            rows={detail.revenue.slice(0, MAX_DETAIL_ROWS)}
+            empty={strings.noData}
+            dateHeader={strings.dateHeader}
+            nameHeader={strings.nameHeader}
+            counterpartyHeader={strings.counterpartyHeader}
+            paymentHeader={strings.paymentHeader}
+            amountHeader={strings.amountHeader}
+            format={format}
+          />
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{strings.expenseDetailTitle}</Text>
+          <ExpenseDetail
+            rows={detail.expenses.slice(0, MAX_DETAIL_ROWS)}
+            empty={strings.noData}
+            dateHeader={strings.dateHeader}
+            nameHeader={strings.nameHeader}
+            counterpartyHeader={strings.counterpartyHeader}
+            paymentHeader={strings.paymentHeader}
+            statusHeader={strings.statusHeader}
+            amountHeader={strings.amountHeader}
+            paidLabel={strings.paid}
+            unpaidLabel={strings.unpaid}
+            format={format}
+          />
+        </View>
+
+        {detail.shopify.connected && detail.shopify.stats && detail.shopify.collection ? (
+          <>
+            <View style={styles.section} break>
+              <Text style={styles.sectionTitle}>{strings.shopifyTitle}</Text>
+              <View style={styles.miniRow}>
+                <Text style={styles.miniLabel}>{strings.collectionRateLabel}</Text>
+                <Text style={styles.miniValue}>
+                  {detail.shopify.collection.rate == null
+                    ? '—'
+                    : `${detail.shopify.collection.rate.toFixed(0)}%`}
+                </Text>
+              </View>
+              <View style={styles.miniRow}>
+                <Text style={styles.miniLabel}>{strings.revenueGapLabel}</Text>
+                <Text style={styles.miniValue}>
+                  {format(detail.shopify.collection.gap)}
+                </Text>
+              </View>
+              <View style={styles.miniRow}>
+                <Text style={styles.miniLabel}>{strings.orderVolumeLabel}</Text>
+                <Text style={styles.miniValue}>
+                  {detail.shopify.stats.orderCount}
+                </Text>
+              </View>
+              <View style={styles.miniRow}>
+                <Text style={styles.miniLabel}>{strings.totalOrderedLabel}</Text>
+                <Text style={styles.miniValue}>
+                  {format(detail.shopify.stats.totalOrdered)}
+                </Text>
+              </View>
+              <View style={styles.miniRow}>
+                <Text style={styles.miniLabel}>{strings.avgOrderValueLabel}</Text>
+                <Text style={styles.miniValue}>
+                  {format(detail.shopify.stats.avgOrderValue)}
+                </Text>
+              </View>
+              <View style={styles.miniRow}>
+                <Text style={styles.miniLabel}>{strings.refundedLabel}</Text>
+                <Text style={styles.miniValue}>
+                  {detail.shopify.stats.refundedCount} ·{' '}
+                  {format(detail.shopify.stats.refundedTotal)}
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{strings.shopifyOrdersTitle}</Text>
+              <ShopifyOrdersTable
+                rows={detail.shopify.orders.slice(0, MAX_DETAIL_ROWS)}
+                empty={strings.noData}
+                dateHeader={strings.dateHeader}
+                orderHeader={strings.orderHeader}
+                customerHeader={strings.customerHeader}
+                statusHeader={strings.statusHeader}
+                amountHeader={strings.amountHeader}
+                format={format}
+              />
+            </View>
+          </>
+        ) : null}
+
         <Text style={styles.footer} fixed>
           {strings.footer}
         </Text>
       </Page>
     </Document>
   );
+}
+
+function pctChange(curr: number, prev: number): number {
+  if (prev === 0) return curr === 0 ? 0 : 100;
+  return ((curr - prev) / Math.abs(prev)) * 100;
+}
+
+function fmtDate(iso: string | null): string {
+  if (!iso) return '—';
+  return iso.slice(0, 10);
 }
 
 function BreakdownTable({
@@ -234,6 +458,161 @@ function BreakdownTable({
           </View>
         );
       })}
+    </View>
+  );
+}
+
+function RevenueDetail({
+  rows,
+  empty,
+  dateHeader,
+  nameHeader,
+  counterpartyHeader,
+  paymentHeader,
+  amountHeader,
+  format,
+}: {
+  rows: ExportRevenueRow[];
+  empty: string;
+  dateHeader: string;
+  nameHeader: string;
+  counterpartyHeader: string;
+  paymentHeader: string;
+  amountHeader: string;
+  format: (n: number) => string;
+}) {
+  if (rows.length === 0) {
+    return (
+      <View style={styles.tableRow}>
+        <Text style={styles.cell}>{empty}</Text>
+      </View>
+    );
+  }
+  return (
+    <View>
+      <View style={styles.tableHeader}>
+        <Text style={styles.cellNarrow}>{dateHeader}</Text>
+        <Text style={styles.cell}>{nameHeader}</Text>
+        <Text style={styles.cell}>{counterpartyHeader}</Text>
+        <Text style={styles.cell}>{paymentHeader}</Text>
+        <Text style={styles.cellNarrowRight}>{amountHeader}</Text>
+      </View>
+      {rows.map((r, i) => (
+        <View key={i} style={styles.tableRow}>
+          <Text style={styles.cellNarrow}>{fmtDate(r.date)}</Text>
+          <Text style={styles.cell}>{r.itemName ?? '—'}</Text>
+          <Text style={styles.cell}>{r.channel ?? '—'}</Text>
+          <Text style={styles.cell}>{r.paymentMethod ?? '—'}</Text>
+          <Text style={styles.cellNarrowRight}>{format(r.amount)}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function ExpenseDetail({
+  rows,
+  empty,
+  dateHeader,
+  nameHeader,
+  counterpartyHeader,
+  paymentHeader,
+  statusHeader,
+  amountHeader,
+  paidLabel,
+  unpaidLabel,
+  format,
+}: {
+  rows: ExportExpenseRow[];
+  empty: string;
+  dateHeader: string;
+  nameHeader: string;
+  counterpartyHeader: string;
+  paymentHeader: string;
+  statusHeader: string;
+  amountHeader: string;
+  paidLabel: string;
+  unpaidLabel: string;
+  format: (n: number) => string;
+}) {
+  if (rows.length === 0) {
+    return (
+      <View style={styles.tableRow}>
+        <Text style={styles.cell}>{empty}</Text>
+      </View>
+    );
+  }
+  return (
+    <View>
+      <View style={styles.tableHeader}>
+        <Text style={styles.cellNarrow}>{dateHeader}</Text>
+        <Text style={styles.cell}>{nameHeader}</Text>
+        <Text style={styles.cell}>{counterpartyHeader}</Text>
+        <Text style={styles.cell}>{paymentHeader}</Text>
+        <Text style={styles.cell}>{statusHeader}</Text>
+        <Text style={styles.cellNarrowRight}>{amountHeader}</Text>
+      </View>
+      {rows.map((r, i) => (
+        <View key={i} style={styles.tableRow}>
+          <Text style={styles.cellNarrow}>{fmtDate(r.date)}</Text>
+          <Text style={styles.cell}>{r.name ?? '—'}</Text>
+          <Text style={styles.cell}>{r.vendor ?? r.category ?? '—'}</Text>
+          <Text style={styles.cell}>{r.paymentMethod ?? '—'}</Text>
+          <Text style={styles.cell}>{r.status === 'paid' ? paidLabel : unpaidLabel}</Text>
+          <Text style={styles.cellNarrowRight}>{format(r.amount)}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function ShopifyOrdersTable({
+  rows,
+  empty,
+  dateHeader,
+  orderHeader,
+  customerHeader,
+  statusHeader,
+  amountHeader,
+  format,
+}: {
+  rows: ExportShopifyOrder[];
+  empty: string;
+  dateHeader: string;
+  orderHeader: string;
+  customerHeader: string;
+  statusHeader: string;
+  amountHeader: string;
+  format: (n: number) => string;
+}) {
+  if (rows.length === 0) {
+    return (
+      <View style={styles.tableRow}>
+        <Text style={styles.cell}>{empty}</Text>
+      </View>
+    );
+  }
+  return (
+    <View>
+      <View style={styles.tableHeader}>
+        <Text style={styles.cellNarrow}>{dateHeader}</Text>
+        <Text style={styles.cellNarrow}>{orderHeader}</Text>
+        <Text style={styles.cell}>{customerHeader}</Text>
+        <Text style={styles.cell}>{statusHeader}</Text>
+        <Text style={styles.cellNarrowRight}>{amountHeader}</Text>
+      </View>
+      {rows.map((r, i) => (
+        <View key={i} style={styles.tableRow}>
+          <Text style={styles.cellNarrow}>{fmtDate(r.date)}</Text>
+          <Text style={styles.cellNarrow}>#{r.orderNumber ?? '—'}</Text>
+          <Text style={styles.cell}>{r.customer ?? '—'}</Text>
+          <Text style={styles.cell}>
+            {[r.financialStatus, r.fulfillmentStatus].filter(Boolean).join(' · ') ||
+              '—'}
+          </Text>
+          <Text style={styles.cellNarrowRight}>{format(r.amount)}</Text>
+        </View>
+      ))}
     </View>
   );
 }

@@ -2,6 +2,10 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
 import { getCurrentBusiness } from '@/lib/business';
 import { listSalesChannels } from '@/lib/queries/transactions';
+import {
+  listPaymentMethodOptions,
+  listShippingProviderOptions,
+} from '@/lib/queries/payment-shipping';
 import { RevenueForm } from '@/components/app/revenue-form';
 
 export default async function NewRevenuePage({
@@ -24,7 +28,11 @@ export default async function NewRevenuePage({
   const business = await getCurrentBusiness();
   if (!business) redirect(`/${locale}/app`);
 
-  const channels = await listSalesChannels(business!.id);
+  const [channels, paymentMethods, shippingProviders] = await Promise.all([
+    listSalesChannels(business!.id),
+    listPaymentMethodOptions(business!.id),
+    listShippingProviderOptions(business!.id),
+  ]);
 
   const amountCents = sp.amount && Number.isFinite(Number(sp.amount))
     ? Math.round(Number(sp.amount) * 100)
@@ -40,6 +48,8 @@ export default async function NewRevenuePage({
         <RevenueForm
           locale={locale}
           channels={channels}
+          paymentMethods={paymentMethods}
+          shippingProviders={shippingProviders}
           initial={
             amountCents != null || sp.item_name || collectedAt || sp.note
               ? {

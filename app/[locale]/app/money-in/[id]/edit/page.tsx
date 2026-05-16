@@ -2,6 +2,10 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { notFound, redirect } from 'next/navigation';
 import { getCurrentBusiness } from '@/lib/business';
 import { getRevenue, listSalesChannels } from '@/lib/queries/transactions';
+import {
+  listPaymentMethodOptions,
+  listShippingProviderOptions,
+} from '@/lib/queries/payment-shipping';
 import { RevenueForm } from '@/components/app/revenue-form';
 
 export default async function EditRevenuePage({
@@ -16,9 +20,11 @@ export default async function EditRevenuePage({
   const business = await getCurrentBusiness();
   if (!business) redirect(`/${locale}/app`);
 
-  const [row, channels] = await Promise.all([
+  const [row, channels, paymentMethods, shippingProviders] = await Promise.all([
     getRevenue(business!.id, id),
     listSalesChannels(business!.id),
+    listPaymentMethodOptions(business!.id),
+    listShippingProviderOptions(business!.id),
   ]);
   if (!row) notFound();
 
@@ -29,6 +35,8 @@ export default async function EditRevenuePage({
         <RevenueForm
           locale={locale}
           channels={channels}
+          paymentMethods={paymentMethods}
+          shippingProviders={shippingProviders}
           initial={{
             id: row.id,
             amount: row.amount,

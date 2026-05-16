@@ -6,6 +6,8 @@ import {
   Tag,
   Layers,
   Bell,
+  CreditCard,
+  Truck,
   ChevronRight,
   ChevronLeft,
 } from 'lucide-react';
@@ -67,6 +69,18 @@ export default async function SettingsPage({
               icon={<Tag size={14} strokeWidth={1.75} />}
               label={t('categories.title')}
               hint={t('categories.hint')}
+            />
+            <NavRow
+              href="/app/settings/payment-methods"
+              icon={<CreditCard size={14} strokeWidth={1.75} />}
+              label={t('paymentMethods.title')}
+              hint={t('paymentMethods.hint')}
+            />
+            <NavRow
+              href="/app/settings/shipping-providers"
+              icon={<Truck size={14} strokeWidth={1.75} />}
+              label={t('shippingProviders.title')}
+              hint={t('shippingProviders.hint')}
             />
             <NavRow
               href="/app/settings/notifications"
@@ -141,7 +155,13 @@ function NavRow({
   label,
   hint,
 }: {
-  href: '/app/settings/business' | '/app/settings/channels' | '/app/settings/categories' | '/app/settings/notifications';
+  href:
+    | '/app/settings/business'
+    | '/app/settings/channels'
+    | '/app/settings/categories'
+    | '/app/settings/payment-methods'
+    | '/app/settings/shipping-providers'
+    | '/app/settings/notifications';
   icon: React.ReactNode;
   label: string;
   hint: string;
