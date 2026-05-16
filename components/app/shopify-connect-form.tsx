@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
-import { Plug } from 'lucide-react';
+import { Info, Plug } from 'lucide-react';
 import { connectShopifyAction } from '@/lib/shopify/connect-action';
 
 type ErrorKey =
@@ -55,6 +55,23 @@ export function ShopifyConnectForm({ locale }: { locale: string }) {
             className={inputClass}
           />
         </Field>
+
+        <div className="flex items-start gap-2.5 rounded-md border border-warning/40 bg-warning/10 px-3 py-2.5 text-xs text-warning">
+          <Info size={14} strokeWidth={2} className="mt-0.5 shrink-0" />
+          <div className="min-w-0 flex-1 leading-relaxed">
+            {t('accountWarning')}{' '}
+            <a
+              href="https://accounts.shopify.com/logout"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-warning/50 underline-offset-2 hover:decoration-warning"
+            >
+              {t('switchAccount')}
+            </a>
+            .
+          </div>
+        </div>
+
         {error ? (
           <p className="text-sm text-danger" role="alert">
             {t(`errors.${error}`)}

@@ -235,17 +235,19 @@
       "subtitle": "اربط متجر Shopify لمزامنة الطلبات تلقائيًا.",
       "connectForm": {
         "title": "اربط متجر Shopify",
-        "subtitle": "أدخل رابط المتجر، وسننقلك إلى Shopify لتفويض حسباتي. نحن نقرأ الطلبات فقط.",
-        "storeLabel": "رابط المتجر",
-        "storePlaceholder": "your-store.myshopify.com",
-        "storeHint": "النطاق فقط — بدون https://",
+        "subtitle": "أدخل نطاق متجر Shopify الخاص بك، وسننقلك إلى Shopify للموافقة على الوصول — نحن نقرأ الطلبات فقط.",
+        "storeLabel": "نطاق متجر Shopify",
+        "storePlaceholder": "yourstore.myshopify.com",
+        "storeHint": "ستجده في لوحة Shopify ← الإعدادات ← النطاقات. النطاقات المخصصة (مثل yourstore.co) لن تعمل.",
+        "accountWarning": "قبل المتابعة، تأكد أنك مسجّل الدخول إلى Shopify بحساب لديه صلاحية المسؤول على هذا المتجر.",
+        "switchAccount": "سجّل الخروج من Shopify أولًا",
         "submit": "اربط مع Shopify",
         "connecting": "جارٍ التحويل إلى Shopify…",
         "errors": {
           "unauthorized": "انتهت صلاحية الجلسة. سجّل الدخول مجددًا.",
-          "storeRequired": "أدخل رابط المتجر.",
-          "invalidDomain": "هذا الرابط لا يبدو متجر Shopify. استخدم yourstore.myshopify.com.",
-          "storeUnreachable": "تعذّر الوصول للمتجر. تحقق من الرابط وحاول مجددًا.",
+          "storeRequired": "أدخل نطاق المتجر.",
+          "invalidDomain": "يرجى إدخال نطاق .myshopify.com الخاص بك، وليس النطاق المخصص.",
+          "storeUnreachable": "تعذّر الوصول للمتجر. تحقق من النطاق وحاول مجددًا.",
           "generic": "تعذّر الربط. حاول لاحقًا."
         }
       },

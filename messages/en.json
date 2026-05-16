@@ -235,17 +235,19 @@
       "subtitle": "Connect your Shopify store to sync orders automatically.",
       "connectForm": {
         "title": "Connect your Shopify store",
-        "subtitle": "Enter your store URL. We'll send you to Shopify to authorize Hesabaty — we only read orders.",
-        "storeLabel": "Store URL",
-        "storePlaceholder": "your-store.myshopify.com",
-        "storeHint": "Just the domain — no https://",
+        "subtitle": "Enter your Shopify store handle. We'll send you to Shopify to approve access — we only read orders.",
+        "storeLabel": "Shopify store handle",
+        "storePlaceholder": "yourstore.myshopify.com",
+        "storeHint": "Find this in Shopify Admin → Settings → Domains. Custom domains (e.g. yourstore.co) will not work.",
+        "accountWarning": "Before continuing, make sure you're signed in to Shopify with an account that has admin access to this store.",
+        "switchAccount": "Sign out of Shopify first",
         "submit": "Connect with Shopify",
         "connecting": "Redirecting to Shopify…",
         "errors": {
           "unauthorized": "Your session expired. Sign in again.",
-          "storeRequired": "Please enter your store URL.",
-          "invalidDomain": "That doesn't look like a Shopify store. Use yourstore.myshopify.com.",
-          "storeUnreachable": "Couldn't reach that store. Check the URL and try again.",
+          "storeRequired": "Please enter your store handle.",
+          "invalidDomain": "Please enter your .myshopify.com handle, not your custom domain.",
+          "storeUnreachable": "Couldn't reach that store. Check the handle and try again.",
           "generic": "Couldn't connect. Try again in a moment."
         }
       },
